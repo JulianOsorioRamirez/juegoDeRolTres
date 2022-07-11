@@ -9,6 +9,7 @@ const userSchema = new Schema(
     password: { type: String },
     email: { type: String },
     tarjeta: { type: String },
+    role: { type: String },
   },
   {
     timestamps: true,

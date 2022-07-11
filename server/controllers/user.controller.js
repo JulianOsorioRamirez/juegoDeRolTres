@@ -1,94 +1,96 @@
 const { httpError } = require('../helpers/handleError');
 const mongoose = require('mongoose');
 
-const Evento = require('../models/Evento');
+const User = require('../models/User');
 
-const getEventos = async (req, res) => {
+const getUsers = async (req, res) => {
   try {
-    const eventos = await Evento.find({});
-    res.json(eventos);
+    const user = await User.find({});
+    res.json(user);
   } catch (err) {
     console.log(err);
     httpError(res, err);
   }
 };
 
-const getEvento = async (req, res) => {
+const getUser = async (req, res) => {
   try {
-    const eventoId = req.params.id;
+    const userId = req.params.id;
 
-    const evento = await Evento.findById(eventoId);
+    const user = await User.findById(userId);
 
-    if (!evento) {
-      res.status(404).json({ error: 'Evento no encontrado' });
+    if (!user) {
+      res.status(404).json({ error: 'Usuario no encontrado' });
     }
-    res.json(evento);
+    res.json(user);
   } catch (err) {
     httpError(res, err);
   }
 };
-const createEvento = async (req, res) => {
-  const { nombre, fecha, participantes, imagen } = req.body;
+const createUser = async (req, res) => {
+  const { userName, apellidos, password, email, tarjeta, role } = req.body;
 
   try {
-    const evento = await new Evento({
-      nombre,
-      fecha,
-      participantes,
-      imagen,
+    const user = await new User({
+      userName,
+      apellidos,
+      password,
+      email,
+      tarjeta,
+      role,
     });
-    evento.save().then((result) => {
+    user.save().then((result) => {
       console.log(result);
       res.status(200);
-      res.send('Evento creado correctamente');
+      res.send('Usuario creado correctamente');
     });
   } catch (err) {
     httpError(res, err);
   }
 };
 
-const updateEvento = async (req, res) => {
+const updateUser = async (req, res) => {
   try {
-    const eventoId = req.params.id;
+    const userId = req.params.id;
 
-    const evento = await Evento.findById(eventoId);
+    const user = await User.findById(eventoId);
 
-    if (!evento) {
-      res.status(404).json({ error: 'Evento no encontrada' });
+    if (!user) {
+      res.status(404).json({ error: 'Usuario no encontrada' });
     }
 
-    const newEvento = {
+    const newUser = {
       ...req.body,
     };
-    const eventoUpdate = await Evento.findByIdAndUpdate(eventoId, newEvento, {
+    const userUpdate = await User.findByIdAndUpdate(userId, newUser, {
       new: true,
     });
-    res.json(eventoUpdate);
+    res.json(userUpdate);
   } catch (err) {
     httpError(res, err);
   }
 };
-const deleteEvento = async (req, res) => {
+const deleteUser = async (req, res) => {
   try {
-    const eventoId = req.params.id;
+    const userId = req.params.id;
 
-    const evento = await Evento.findById(eventoId);
+    const user = await User.findById(userId);
 
-    if (!evento) {
-      res.status(404).json({ error: 'Evento no encontrado' });
+    if (!user) {
+      res.status(404).json({ error: 'User no encontrado' });
     }
 
-    await Evento.findByIdAndDelete(eventoId);
-    res.json({ msg: 'Evento eliminado correctamente' });
+    await User.findByIdAndDelete(userId);
+    res.json({ msg: 'Usuario eliminado correctamente' });
   } catch (err) {
     httpError(res, err);
   }
 };
 
 module.exports = {
-  getEventos,
-  getEvento,
-  createEvento,
-  updateEvento,
-  deleteEvento,
+  getUsers,
+  getUser,
+  createUser,
+  updateUser,
+  deleteUser,
 };
