@@ -6,7 +6,7 @@ const cors = require('cors');
 const app = express();
 const { dbConnect } = require('./conexion/mongo');
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.urlencoded({ extended: false }));

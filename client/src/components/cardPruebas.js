@@ -1,4 +1,4 @@
-import React, { useEffects, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
@@ -6,13 +6,24 @@ function BasicExample() {
 
     const [cards, setCards] = useState([]);
 
-    useEffects(() => {
-        fetch('pruebas')
+    
+
+    useEffect(() => {
+        fetch('eventos')
             .then(res => res.json())
-            .then(data => setCards(data))
+            .then(res => {
+                setCards(res.eventos);
+                console.log(res.eventos);
+                })
+                .catch(err => {   
+                    console.log(err) 
+                }
+                );
+                
+            
     }, []);
 
-
+console.log(cards)
     return (
         <div className="targetas">
 

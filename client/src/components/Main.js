@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { Component, useEffects, useState } from "react";
 
 import { Routes, Route } from "react-router-dom";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Registro from "../pages/Registro";
-import Nav from "../components/Nav";
+import Nav from "./Nav";
 import Pruebas from "../pages/Puebas";
 import Andalucia from "../pages/Andalucia";
 

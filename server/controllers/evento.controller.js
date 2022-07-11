@@ -6,7 +6,26 @@ const Evento = require('../models/Evento');
 const getEventos = async (req, res) => {
   try {
     const eventos = await Evento.find({});
-    res.json(eventos);
+    console.log(eventos);
+
+    res.json({
+      message: true,
+      eventos
+    });
+  } catch (err) {
+    console.log(err);
+    httpError(res, err);
+  }
+};
+const getEventosAndalucia = async (req, res) => {
+  try {
+    const eventos = await Evento.find({ provincia: 'Andalucia' });
+    console.log(eventos);
+
+    res.json({
+      message: true,
+      eventos
+    });
   } catch (err) {
     console.log(err);
     httpError(res, err);
@@ -28,7 +47,7 @@ const getEvento = async (req, res) => {
   }
 };
 const createEvento = async (req, res) => {
-  const { nombre, fecha, participantes, imagen } = req.body;
+  const { nombre, fecha, participantes, imagen, provincia } = req.body;
 
   try {
     const evento = await new Evento({
@@ -36,6 +55,7 @@ const createEvento = async (req, res) => {
       fecha,
       participantes,
       imagen,
+      provincia,
     });
     evento.save().then((result) => {
       console.log(result);
@@ -91,4 +111,5 @@ module.exports = {
   createEvento,
   updateEvento,
   deleteEvento,
+  getEventosAndalucia
 };
