@@ -7,8 +7,8 @@ const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email }).exec();
-
+    const user = await User.findOne({ email });
+    console.log(user);
     if (!user) {
       res.status(404);
       res.send({ error: 'Usuario no encontrado' });
