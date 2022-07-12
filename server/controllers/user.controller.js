@@ -2,6 +2,8 @@ const { httpError } = require('../helpers/handleError');
 const mongoose = require('mongoose');
 
 const User = require('../models/User');
+const { hash } = require('bcryptjs');
+const { encrypt } = require('../helpers/helper');
 
 const getUsers = async (req, res) => {
   try {
@@ -34,7 +36,7 @@ const createUser = async (req, res) => {
     const user = await new User({
       userName,
       apellidos,
-      password,
+      password: await encrypt(password),
       email,
       tarjeta,
       role,
