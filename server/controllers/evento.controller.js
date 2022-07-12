@@ -36,14 +36,29 @@ const getEventosAndalucia = async (req, res) => {
 const getComprar = async (req, res) => {
   try {
     const idPrueba = req.body.idPrueba
-    const eventos = await Evento.find({ _id: idPrueba });
-    console.log(eventos);
 
-    res.json({
-      message: true,
-      eventos
-    });
-  } catch (err) {
+    const eventos = await Evento.find({ _id: idPrueba });
+
+    console.log(eventos);
+    const MaxPer = eventos[0].maxParticipantes;
+    console.log(MaxPer);
+
+    if ((eventos[0].participantes).length <= MaxPer) {
+      res.json({
+        message: true,
+        eventos
+      });
+    } else {
+      console.log("no se puede comprar");
+      res.json({
+        message: false,
+
+      });
+    }
+
+  }
+
+  catch (err) {
     console.log(err);
     httpError(res, err);
   }
