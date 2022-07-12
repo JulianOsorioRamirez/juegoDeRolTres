@@ -11,7 +11,6 @@ const {
   createEvento,
   updateEvento,
   deleteEvento,
-  
 } = require('../controllers/evento.controller');
 const {
   getUsers,
