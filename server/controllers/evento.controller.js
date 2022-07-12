@@ -5,8 +5,10 @@ const Evento = require('../models/Evento');
 
 const getEventos = async (req, res) => {
   try {
+    console.log(req.body);
+
     const eventos = await Evento.find({});
-    console.log(eventos);
+    // console.log(eventos);
 
     res.json({
       message: true,
@@ -20,7 +22,7 @@ const getEventos = async (req, res) => {
 const getEventosAndalucia = async (req, res) => {
   try {
     const eventos = await Evento.find({ provincia: 'Andalucia' });
-    console.log(eventos);
+    // console.log(eventos);
 
     res.json({
       message: true,
@@ -31,11 +33,26 @@ const getEventosAndalucia = async (req, res) => {
     httpError(res, err);
   }
 };
+const getComprar = async (req, res) => {
+  try {
+    const idPrueba = req.body.idPrueba
+    const eventos = await Evento.find({ _id: idPrueba });
+    console.log(eventos);
+
+    res.json({
+      message: true,
+      eventos
+    });
+  } catch (err) {
+    console.log(err);
+    httpError(res, err);
+  }
+}
 
 const getEvento = async (req, res) => {
   try {
-    const eventoId = req.params.id;
-
+    const eventoId = req.body.id;
+    console.log(eventoId);
     const evento = await Evento.findById(eventoId);
 
     if (!evento) {
@@ -111,5 +128,6 @@ module.exports = {
   createEvento,
   updateEvento,
   deleteEvento,
-  getEventosAndalucia
+  getEventosAndalucia,
+  getComprar
 };

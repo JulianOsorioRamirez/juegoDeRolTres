@@ -4,6 +4,7 @@ const { login, registro } = require('../controllers/auth.controller');
 const {
   getEventos,
   getEventosAndalucia,
+  getComprar,
   getEvento,
   createEvento,
   updateEvento,
@@ -15,6 +16,7 @@ router.post('/register', registro);
 router.get('/eventos', getEventos);
 router.get('/evento/:id', getEvento);
 router.post('/eventosAndalucia', getEventosAndalucia);
+router.post('/eventoCompra', getComprar);
 router.post('/eventos', createEvento);
 router.put('/eventos/:id', updateEvento);
 router.delete('/eventos/:id', deleteEvento);

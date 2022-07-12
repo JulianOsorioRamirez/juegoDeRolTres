@@ -7,6 +7,7 @@ import Registro from "../pages/Registro";
 import Nav from "./Nav";
 import Pruebas from "../pages/Puebas";
 import Andalucia from "../pages/Andalucia";
+import Compra from "../pages/Compra";
 
 
 
@@ -19,11 +20,12 @@ class Main extends Component {
         <div>
              <Nav />
             <Routes>
-                <Route path="/home"  element={<Home />} />
+                <Route path="/home" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/registro" element={<Registro />} />
                 <Route path="/pruebas" element={<Pruebas />} />
                 <Route path="/andalucia" element={<Andalucia />} />
+                <Route path="/compra" element={<Compra />} />
                 <Route path="*" element={<p>There's nothing here: 404!</p>} />
                 
             </Routes>
