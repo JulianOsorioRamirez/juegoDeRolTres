@@ -16,6 +16,7 @@ const {
 const {
   getUsers,
   getUser,
+  getTarjetaUser,
   createUser,
   updateUser,
   deleteUser,
@@ -39,6 +40,7 @@ router.delete('/eventos/:id', deleteEvento);
 router.get('/users', getUsers);
 router.get('/user/:id', getUser);
 router.post('/users', createUser);
+router.post('/tarjeta', getTarjetaUser);
 router.put('/users/:id', updateUser);
 router.delete('/users/:id', deleteUser);
 router.get('/provincias', getProvincias);

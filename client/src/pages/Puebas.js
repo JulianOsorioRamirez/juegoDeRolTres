@@ -7,8 +7,9 @@ function BasicExample() {
     const [cards, setCards] = useState([]);
     const [Recoger, setRecoger] = useState("");
     
-    localStorage.setItem('user', JSON.stringify({
-        user: Recoger
+    
+    localStorage.setItem('prueba', JSON.stringify({
+        prueba: Recoger
     }));
     
 
@@ -18,6 +19,7 @@ function BasicExample() {
             .then(res => res.json())
             .then(res => {
                 setCards(res.eventos);
+                // setMensaje(res.mensage)
               
                 })
                 .catch(err => {   
@@ -28,9 +30,6 @@ function BasicExample() {
             
     }, []);
 
-
-    
-console.log(Recoger)
 
     return (
         
@@ -52,7 +51,12 @@ console.log(Recoger)
                             <Card.Text>
                                 Nº maximo de participantes : {tarjeta.maxParticipantes}
                             </Card.Text>
+                            {(tarjeta.participantes).length < 10 ?
                             <Button variant="primary" href={`/compra `} onClick={()=>setRecoger(tarjeta._id)}>Inscribirte</Button>
+                                :  <Card.Text>
+                                    <h1 style={{color:"red",border:"1px solid red"}}> No quedan Plazas disponibles </h1>
+                                </Card.Text>
+                            }
                         </Card.Body>
                     </Card>
                 )

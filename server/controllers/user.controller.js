@@ -48,6 +48,22 @@ const createUser = async (req, res) => {
     httpError(res, err);
   }
 };
+const getTarjetaUser = async (req, res) => {
+  try {
+    const userMail = req.body.emailUser;
+    const nTarjeta = req.body.nTarjeta;
+    console.log(nTarjeta);
+    const user = await User.findOne({ email: userMail });
+    if (!user) {
+      res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+    res.json(user.tarjeta);
+  } catch (err) {
+    httpError(res, err);
+  }
+}
+
+
 
 const updateUser = async (req, res) => {
   try {
@@ -93,4 +109,5 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
+  getTarjetaUser,
 };

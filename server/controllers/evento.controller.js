@@ -7,13 +7,15 @@ const getEventos = async (req, res) => {
   try {
     console.log(req.body);
 
-    const eventos = await Evento.find({});
-    // console.log(eventos);
 
+
+    const eventos = await Evento.find({});
+   
     res.json({
       message: true,
       eventos
     });
+   
   } catch (err) {
     console.log(err);
     httpError(res, err);
@@ -52,6 +54,7 @@ const getComprar = async (req, res) => {
       console.log("no se puede comprar");
       res.json({
         message: false,
+        eventos
 
       });
     }
