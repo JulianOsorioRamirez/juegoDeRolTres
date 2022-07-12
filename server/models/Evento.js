@@ -8,6 +8,9 @@ const eventoSchema = new Schema(
     fecha: { type: String },
     participantes: [{ type: String }],
     imagen: [{ type: String }],
+    provincia: { type: String },
+    precio: { type: String },
+    maxParticipantes: { type: Number },
   },
   {
     timestamps: true,

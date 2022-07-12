@@ -5,18 +5,69 @@ const Evento = require('../models/Evento');
 
 const getEventos = async (req, res) => {
   try {
+    console.log(req.body);
+
     const eventos = await Evento.find({});
-    res.json(eventos);
+    // console.log(eventos);
+
+    res.json({
+      message: true,
+      eventos
+    });
   } catch (err) {
     console.log(err);
     httpError(res, err);
   }
 };
+const getEventosAndalucia = async (req, res) => {
+  try {
+    const eventos = await Evento.find({ provincia: 'Andalucia' });
+    // console.log(eventos);
+
+    res.json({
+      message: true,
+      eventos
+    });
+  } catch (err) {
+    console.log(err);
+    httpError(res, err);
+  }
+};
+const getComprar = async (req, res) => {
+  try {
+    const idPrueba = req.body.idPrueba
+
+    const eventos = await Evento.find({ _id: idPrueba });
+
+    console.log(eventos);
+    const MaxPer = eventos[0].maxParticipantes;
+    console.log(MaxPer);
+
+    if ((eventos[0].participantes).length <= MaxPer) {
+      res.json({
+        message: true,
+        eventos
+      });
+    } else {
+      console.log("no se puede comprar");
+      res.json({
+        message: false,
+
+      });
+    }
+
+  }
+
+  catch (err) {
+    console.log(err);
+    httpError(res, err);
+  }
+}
 
 const getEvento = async (req, res) => {
   try {
-    const eventoId = req.params.id;
-
+    const eventoId = req.body.id;
+    console.log(eventoId);
     const evento = await Evento.findById(eventoId);
 
     if (!evento) {
@@ -28,7 +79,7 @@ const getEvento = async (req, res) => {
   }
 };
 const createEvento = async (req, res) => {
-  const { nombre, fecha, participantes, imagen } = req.body;
+  const { nombre, fecha, participantes, imagen, provincia } = req.body;
 
   try {
     const evento = await new Evento({
@@ -36,6 +87,7 @@ const createEvento = async (req, res) => {
       fecha,
       participantes,
       imagen,
+      provincia,
     });
     evento.save().then((result) => {
       console.log(result);
@@ -91,4 +143,6 @@ module.exports = {
   createEvento,
   updateEvento,
   deleteEvento,
+  getEventosAndalucia,
+  getComprar
 };
