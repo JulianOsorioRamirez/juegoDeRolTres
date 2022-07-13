@@ -38,7 +38,7 @@ function BasicExample() {
             navigate("/home")
           }
       
-          // window.location.reload()
+          window.location.reload()
        
 
     }
