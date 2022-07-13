@@ -28,6 +28,13 @@ const {
   updateProvincia,
   deleteProvincia,
 } = require('../controllers/provincia.controller');
+const {
+  getInscripcions,
+  getInscripcion,
+  createInscripcion,
+  updateInscripcion,
+  deleteInscripcion,
+} = require('../controllers/inscripcion.controller');
 router.post('/login', login);
 router.post('/register', registro);
 router.get('/eventos', getEventos);
@@ -49,5 +56,10 @@ router.get('/provincia/:id', getProvincia);
 router.post('/provincias', createProvincia);
 router.put('/provincias/:id', updateProvincia);
 router.delete('/provincias/:id', deleteProvincia);
+router.get('/inscripcions', getInscripcions);
+router.get('/inscripcion/:id', getInscripcion);
+router.post('/inscripcion', createInscripcion);
+router.put('/inscripcion/:id', updateInscripcion);
+router.delete('/inscripcion/:id', deleteInscripcion);
 
 module.exports = router;
