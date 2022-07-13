@@ -1,7 +1,10 @@
 const { httpError } = require('../helpers/handleError');
 const mongoose = require('mongoose');
+const uuid = require('uuid');
 
 const Evento = require('../models/Evento');
+const User = require('../models/User');
+const Inscripcion = require('../models/Inscripcion');
 
 const getEventos = async (req, res) => {
   try {
@@ -10,12 +13,12 @@ const getEventos = async (req, res) => {
 
 
     const eventos = await Evento.find({});
-   
+
     res.json({
       message: true,
       eventos
     });
-   
+
   } catch (err) {
     console.log(err);
     httpError(res, err);
@@ -113,15 +116,17 @@ const updateUserEvento = async (req, res) => {
     if (!eventoFind) {
       res.status(404).json({ error: 'Evento no encontrado' });
     }
-      const newEvento = { $push: {
-        participantes: emailUser}
-      };
-      const eventoUpdate = await Evento.findByIdAndUpdate(evento, newEvento, {
-        new: true,
-      });
-      console.log(eventoUpdate);
- 
-    
+    const newEvento = {
+      $push: {
+        participantes: emailUser
+      }
+    };
+    const eventoUpdate = await Evento.findByIdAndUpdate(evento, newEvento, {
+      new: true,
+    });
+    console.log(eventoUpdate);
+
+
 
 
     res.json(eventoUpdate);
@@ -131,7 +136,7 @@ const updateUserEvento = async (req, res) => {
 
   }
 
-  }
+}
 const updateEvento = async (req, res) => {
   try {
     const eventoId = req.params.id;
@@ -169,6 +174,76 @@ const deleteEvento = async (req, res) => {
     httpError(res, err);
   }
 };
+const AplicarDorsal = async (req, res) => {
+
+  try {
+    const eventoId = req.body.idPrueba;
+
+    function getRandomArbitrary(min, max) {
+      return (Math.random() * (max - min) + min).toFixed(0);
+    }
+
+
+    const evento = await Inscripcion.find({ idPrueba: eventoId });
+    // console.log("Esto es el evento "+evento);
+    for (let i = 0; i < evento.length; i++) {
+      console.log(evento[i]);
+
+      const dorsal = getRandomArbitrary(1, 100);
+
+      console.log("Esto es el dorsal " + dorsal);
+
+      const newInscripcion = {
+        $push: {
+          dorsal: dorsal
+        }
+      };
+      console.log(newInscripcion);
+      const inscripcionUpdate = await Inscripcion.updateMany(evento[i]._id, newInscripcion, {
+        new: true,
+      });
+     
+      console.log(inscripcionUpdate);
+    }
+
+
+    console.log(evento);
+
+
+    // for (let i = 0; i < evento.participantes.length; i++) {
+    //   const dorsal = getRandomArbitrary(1, 100);
+
+    //   const insertarDorsal = { $push: { inscrpcion: dorsal } };
+    //   const eventoUpdate = await User.findOneAndUpdate({ email: evento.participantes[i] }, insertarDorsal, {
+    //     new: true,
+    //   });
+
+
+
+
+
+    // const usuarios = await User.findOne({ email: evento.participantes[i] });
+
+    // const insertarDorsal = { $set: { inscrpcion: [dorsal] } };
+
+    // const eventoUpdate = await User.findByIdAndUpdate(usuarios._id, insertarDorsal);
+
+
+    // console.log(eventoUpdate);
+    // console.log(usuarios.inscripcion);
+    // }
+
+
+
+
+
+
+  } catch (err) {
+    httpError(res, err);
+  }
+}
+
+
 
 module.exports = {
   getEventos,
@@ -179,4 +254,5 @@ module.exports = {
   getEventosAndalucia,
   getComprar,
   updateUserEvento,
+  AplicarDorsal,
 };

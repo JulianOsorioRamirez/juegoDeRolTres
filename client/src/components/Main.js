@@ -1,4 +1,6 @@
+
 import React, { Component, useEffects, useState } from 'react';
+
 
 import { Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home';
@@ -14,6 +16,7 @@ import ComRealizada from '../pages/ComRealizada';
 import { Historial } from '../pages/Historial';
 
 class Main extends Component {
+
   render() {
     return (
       <div>
@@ -35,5 +38,10 @@ class Main extends Component {
       </div>
     );
   }
+
+  
+
+
+
 }
 export default Main;

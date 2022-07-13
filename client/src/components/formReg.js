@@ -105,14 +105,14 @@ function FormExample() {
         </Form.Group>
       </Row>
       <Form.Group className="mb-3">
-        <Form.Check
+        <Form.Check id="formCheck"
           required
           label="Agree to terms and conditions"
           feedback="You must agree before submitting."
           feedbackType="invalid"
         />
       </Form.Group>
-      <Button onClick={() => Registro()} type="submit">Submit form</Button>
+      <Button id="registrerBtn" onClick={() => Registro()} type="submit">Submit form</Button>
     </Form>
   );
 }

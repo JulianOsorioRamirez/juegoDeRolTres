@@ -12,6 +12,7 @@ const {
   updateEvento,
   deleteEvento,
   updateUserEvento,
+  AplicarDorsal,
 } = require('../controllers/evento.controller');
 const {
   getUsers,
@@ -34,6 +35,7 @@ const {
   createInscripcion,
   updateInscripcion,
   deleteInscripcion,
+
 } = require('../controllers/inscripcion.controller');
 router.post('/login', login);
 router.post('/register', registro);
@@ -42,6 +44,7 @@ router.get('/evento/:id', getEvento);
 router.post('/eventosAndalucia', getEventosAndalucia);
 router.post('/eventoCompra', getComprar);
 router.post('/eventos', createEvento);
+router.post('/apliDorsal', AplicarDorsal);
 router.put('/eventos/:id', updateEvento);
 router.put('/eventosUsuarios', updateUserEvento);
 router.delete('/eventos/:id', deleteEvento);
@@ -59,6 +62,7 @@ router.delete('/provincias/:id', deleteProvincia);
 router.get('/inscripcions', getInscripcions);
 router.get('/inscripcion/:id', getInscripcion);
 router.post('/inscripcion', createInscripcion);
+
 router.put('/inscripcion/:id', updateInscripcion);
 router.delete('/inscripcion/:id', deleteInscripcion);
 

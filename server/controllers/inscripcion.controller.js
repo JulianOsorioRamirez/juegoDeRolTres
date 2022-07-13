@@ -28,22 +28,22 @@ const getInscripcion = async (req, res) => {
   }
 };
 const createInscripcion = async (req, res) => {
-  const { evento, dorsal } = req.body;
+  const { evento } = req.body;
+  console.log(evento);
 
   try {
     const inscripcion = await new Inscripcion({
       evento,
-      dorsal,
+      dorsal: "",
     });
     inscripcion.save().then((result) => {
-      console.log(result);
-      res.status(200);
-      res.send('Inscripcion creada correctamente');
+     res.json(result);
     });
   } catch (err) {
     httpError(res, err);
   }
 };
+
 
 const updateInscripcion = async (req, res) => {
   try {
@@ -93,4 +93,5 @@ module.exports = {
   updateInscripcion,
   deleteInscripcion,
   createInscripcion,
+
 };
