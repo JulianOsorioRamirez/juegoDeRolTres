@@ -1,12 +1,15 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import React, { useState,useEffect } from "react";
+import {useNavigate} from "react-router-dom"
 
 function BasicExample() {
   const [sendEmailLog, setDataToEmailLog] = useState("");
-  
   const [sendPassLog, setDataToPassLog] = useState("");
+  const[sendToken, setDataToken] = useState("");
   
+  const navigate = useNavigate()
+  console.log(sendEmailLog)
 
   function Log () {
     
@@ -19,11 +22,24 @@ function BasicExample() {
     
     fetch("login", requestOptions)
       .then((response) => response.json())
-      .then(res => {
-        console.log(res)
-    })
-    
-      localStorage.setItem("user", JSON.stringify(sendEmailLog));
+      .then((res) =>  setDataToken((res.token)))
+      
+        localStorage.setItem("user", JSON.stringify(sendEmailLog));
+        
+        localStorage.setItem("token", JSON.stringify(sendToken));
+        
+        
+
+        
+        
+
+      
+          if(sendEmailLog){
+            navigate("/home")
+          }
+      
+          // window.location.reload()
+       
 
     }
     
