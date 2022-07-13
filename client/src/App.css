@@ -65,9 +65,24 @@
 .img-rounded { width:42px; }
 
 .btnSelect{
-  display: inline;
+ 
+  width: 150px; 
+  height: 40px;
+  font-size: 1.5rem;
+  border-radius: 35px;
+  color: white;
+  background-color: #61dafb;
+  border: none;
+
 }
 
 .btnDorsal{
-  display: none;
+  margin-left: 50px;
+  width: 150px; 
+  height: 40px;
+  font-size: 1.3rem;
+  border-radius: 35px;
+  color: white;
+  background-color: #ff00ae;
+  border: none;
 }

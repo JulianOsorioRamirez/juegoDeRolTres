@@ -30,7 +30,7 @@ function BasicExample() {
 
     }, []);
 
-    function aplicarDorsal(){
+    function aplicarDorsal() {
 
         const requestOptions = {
             method: 'POST',
@@ -41,7 +41,7 @@ function BasicExample() {
         };
 
 
-        fetch ('apliDorsal', requestOptions)
+        fetch('apliDorsal', requestOptions)
             .then(res => res.json())
             .then(res => {
                 console.log("hola")
@@ -59,10 +59,8 @@ function BasicExample() {
     if (localStorage.getItem('empleado')) {
 
 
-        function aparecer() {
-            document.querySelector("btnDorsal").style.display = "block";
-            document.querySelector("btnSelect").style.display = "none";
-        }
+
+
 
         return (
 
@@ -70,6 +68,7 @@ function BasicExample() {
 
                 {cards ? cards.map((tarjeta, i) => {
 
+                   
                     return (
                         <Card id="pruebaCard" style={{ width: '24.5rem' }}>
                             <Card.Img variant="top" src={tarjeta.imagen} />
@@ -84,10 +83,12 @@ function BasicExample() {
                                 <Card.Text>
                                     Nº maximo de participantes : {tarjeta.maxParticipantes}
                                 </Card.Text>
-                                <button class="btnSelect" onClick={() => setRecoger(tarjeta._id)} onChange={aparecer()}>Selecciona</button>
-                                <button class="btnDorsal"onClick={() => {aplicarDorsal()} }>
+
+                                <Button className="btnSelect" onClick={() =>  setRecoger(tarjeta._id) } >Seleccionar</Button>
+
+                                <Button className="btnDorsal" onClick={() => { aplicarDorsal() }}>
                                     Aplicar dorsal
-                                </button>
+                                </Button>
                             </Card.Body>
                         </Card>
                     )

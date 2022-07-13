@@ -198,12 +198,12 @@ const AplicarDorsal = async (req, res) => {
           dorsal: dorsal
         }
       };
-      
+      console.log(newInscripcion);
       const inscripcionUpdate = await Inscripcion.updateMany(evento[i]._id, newInscripcion, {
         new: true,
       });
+     
       console.log(inscripcionUpdate);
-      
     }
 
 
