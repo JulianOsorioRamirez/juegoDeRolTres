@@ -24,6 +24,7 @@ class Main extends Component {
              <Nav />
             <Routes>
                 <Route path="/home" element={<Home />} />
+                <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/registro" element={<Registro />} />
                 <Route path="/pruebas" element={<Pruebas />} />
