@@ -51,6 +51,7 @@ const createUser = async (req, res) => {
   }
 };
 const getTarjetaUser = async (req, res) => {
+  
   try {
     const userMail = req.body.emailUser;
     const nTarjeta = req.body.nTarjeta;
@@ -59,7 +60,16 @@ const getTarjetaUser = async (req, res) => {
     if (!user) {
       res.status(404).json({ error: 'Usuario no encontrado' });
     }
-    res.json(user.tarjeta);
+   const newTarjeta = { $set:{
+    tarjeta : nTarjeta}
+   }
+    const userUpdate = await User.updateOne(user, newTarjeta, {
+      
+    });
+    res.json(userUpdate);
+
+
+
   } catch (err) {
     httpError(res, err);
   }
@@ -70,8 +80,8 @@ const getTarjetaUser = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const userId = req.params.id;
-
-    const user = await User.findById(eventoId);
+    const nTarjeta = req.params.nTarjeta;
+    const user = await User.findById(userId);
 
     if (!user) {
       res.status(404).json({ error: 'Usuario no encontrada' });

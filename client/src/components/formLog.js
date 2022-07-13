@@ -6,7 +6,7 @@ function BasicExample() {
   const [sendEmailLog, setDataToEmailLog] = useState("");
   
   const [sendPassLog, setDataToPassLog] = useState("");
-  console.log(sendEmailLog)
+  
 
   function Log () {
     
@@ -23,7 +23,7 @@ function BasicExample() {
         console.log(res)
     })
     
-      localStorage.setItem("user", sendEmailLog)
+      localStorage.setItem("user", JSON.stringify(sendEmailLog));
 
     }
     

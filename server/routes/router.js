@@ -11,6 +11,7 @@ const {
   createEvento,
   updateEvento,
   deleteEvento,
+  updateUserEvento,
 } = require('../controllers/evento.controller');
 const {
   getUsers,
@@ -35,11 +36,12 @@ router.post('/eventosAndalucia', getEventosAndalucia);
 router.post('/eventoCompra', getComprar);
 router.post('/eventos', createEvento);
 router.put('/eventos/:id', updateEvento);
+router.put('/eventosUsuarios', updateUserEvento);
 router.delete('/eventos/:id', deleteEvento);
 router.get('/users', getUsers);
 router.get('/user/:id', getUser);
 router.post('/users', createUser);
-router.post('/tarjeta', getTarjetaUser);
+router.put('/tarjeta', getTarjetaUser);
 router.put('/users/:id', updateUser);
 router.delete('/users/:id', deleteUser);
 router.get('/provincias', getProvincias);

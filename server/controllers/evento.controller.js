@@ -101,7 +101,34 @@ const createEvento = async (req, res) => {
     httpError(res, err);
   }
 };
+const updateUserEvento = async (req, res) => {
+  try {
+    const evento = req.body.prueba;
+    const emailUser = req.body.emailUser;
 
+    console.log(emailUser);
+    const eventoFind = await Evento.findOne({ _id: evento });
+    // console.log(eventoFind.participantes);
+    if (!eventoFind) {
+      res.status(404).json({ error: 'Evento no encontrado' });
+    }
+      const newEvento = { $set: {
+        participantes: [emailUser]}
+      };
+      console.log(newEvento);
+    const eventoUpdate = await Evento.updateOne(eventoFind, newEvento, {
+
+    });
+
+
+    res.json(eventoUpdate);
+
+  } catch (err) {
+    httpError(res, err);
+
+  }
+
+  }
 const updateEvento = async (req, res) => {
   try {
     const eventoId = req.params.id;
@@ -147,5 +174,6 @@ module.exports = {
   updateEvento,
   deleteEvento,
   getEventosAndalucia,
-  getComprar
+  getComprar,
+  updateUserEvento,
 };
