@@ -9,7 +9,13 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function CollapsibleExample() {
+  function LogOut () {
+    localStorage.removeItem('user');
+
+    window.location.reload()
+  }
     return (
+     <div>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
           <Navbar.Brand href="/home"><img src={logo} alt="logo" width="100px"/></Navbar.Brand>
@@ -30,15 +36,20 @@ function CollapsibleExample() {
                 
               </NavDropdown>
             </Nav>
-            <Nav>
+            {localStorage.getItem("user") ? "" : <Nav>
               <Nav.Link href="/Login">Log in</Nav.Link>
               <Nav.Link eventKey={2} href="/Registro">
                 Register
               </Nav.Link>
-            </Nav>
+            </Nav>}
+            {localStorage.getItem("user") ? <Nav>
+              <Nav.Link onClick={() => LogOut()} href="/Login">Log Out</Nav.Link>
+              
+            </Nav>: "" }
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      </div> 
     );
   }
   
