@@ -120,10 +120,7 @@ const updateUserEvento = async (req, res) => {
       });
       console.log(eventoUpdate);
  
-      
-    // const eventoUpdate = await Evento.updateOne(eventoFind, newEvento, {
-
-    // });
+    
 
 
     res.json(eventoUpdate);

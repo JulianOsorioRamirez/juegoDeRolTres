@@ -10,6 +10,7 @@ const userSchema = new Schema(
     email: { type: String },
     tarjeta: { type: String },
     role: { type: String },
+    inscripcion: { type: Array },
   },
   {
     timestamps: true,

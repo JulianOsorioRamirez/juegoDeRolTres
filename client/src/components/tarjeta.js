@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import TarjetaC from '../assets/img/tarjeta.png'
-import { useParams } from 'react-router-dom';
+import { useNavigate,useParams } from 'react-router-dom';
 
 function Tarjeta() {
+    const navigate = useNavigate();
     const params = useParams();
     console.log(params);
     const [nTarjetaSend, setNTarjeta] = useState('');
@@ -16,7 +17,11 @@ function Tarjeta() {
     const prueba = JSON.parse(localStorage.getItem('prueba')).prueba;
     console.log(prueba)
 
+
+
+
     const sendData = () => {
+        
         const reaquestOptions = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -46,10 +51,13 @@ function Tarjeta() {
                 console.log(err)
             }
             );
+            navigate("/ComRealizada");
+           
     };
 
 
     return (
+        
 
         <Form action="#" class="credit-card-div">
             <div class="panel panel-default" >
@@ -93,11 +101,9 @@ function Tarjeta() {
                         </div>
                     </div>
                     <div class="row ">
+                        
                         <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust">
-                            <Form.Control type="submit" class="btn btn-danger" value="CANCEL" />
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust">
-                            <Form.Control type="submit" class="btn btn-warning btn-block" value="PAY NOW" onClick={() => sendData()} />
+                            <Form.Control type="submit" class="btn btn-warning btn-block" value="PAY NOW" onClick={() => sendData()}  />
                         </div>
                     </div>
 
