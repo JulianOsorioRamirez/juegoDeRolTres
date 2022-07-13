@@ -23,7 +23,8 @@ const getEventos = async (req, res) => {
 };
 const getEventosAndalucia = async (req, res) => {
   try {
-    const eventos = await Evento.find({ provincia: 'Andalucia' });
+    const provinciaEvento = req.body.provincia;
+    const eventos = await Evento.find({ provincia: provinciaEvento });
     // console.log(eventos);
 
     res.json({
