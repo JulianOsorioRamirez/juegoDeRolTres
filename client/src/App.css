@@ -63,3 +63,11 @@
 .credit-card-div .small-font { font-size:9px; }
 .credit-card-div .pad-adjust { padding-top:10px; }
 .img-rounded { width:42px; }
+
+.btnSelect{
+  display: inline;
+}
+
+.btnDorsal{
+  display: none;
+}

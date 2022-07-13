@@ -26,6 +26,7 @@ function CollapsibleExample() {
               
               
               <Nav.Link href="/Pruebas">Pruebas</Nav.Link>
+              {localStorage.getItem("empleado") ?  "" : 
               <NavDropdown title="Provincias" id="collasible-nav-dropdown">
                 <NavDropdown.Item href="/Andalucia">Andalucía</NavDropdown.Item>
                 <NavDropdown.Item href="/Madrid">
@@ -35,17 +36,21 @@ function CollapsibleExample() {
                
                 
               </NavDropdown>
+                }
             </Nav>
-            {localStorage.getItem("user") ? "" : <Nav>
+          
+            {localStorage.getItem("user") || localStorage.getItem("empleado") ?  
+            <Nav>
+            <Nav.Link onClick={() => LogOut()} href="/Login">Log Out</Nav.Link>
+            
+          </Nav> 
+              : <Nav>
               <Nav.Link href="/Login">Log in</Nav.Link>
               <Nav.Link eventKey={2} href="/Registro">
                 Register
               </Nav.Link>
-            </Nav>}
-            {localStorage.getItem("user") ? <Nav>
-              <Nav.Link onClick={() => LogOut()} href="/Login">Log Out</Nav.Link>
-              
-            </Nav>: "" }
+            </Nav>
+            }
           </Navbar.Collapse>
         </Container>
       </Navbar>

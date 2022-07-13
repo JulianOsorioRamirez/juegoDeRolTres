@@ -63,7 +63,7 @@ const getTarjetaUser = async (req, res) => {
    const newTarjeta = { $set:{
     tarjeta : nTarjeta}
    }
-    const userUpdate = await User.updateOne(user, newTarjeta, {
+    const userUpdate = await User.findOneAndReplace(user, newTarjeta, {
       
     });
     res.json(userUpdate);

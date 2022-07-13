@@ -11,6 +11,7 @@ import Bilbao from "../pages/Bilbao";
 import Madrid from "../pages/Madrid";
 import Compra from "../pages/Compra";
 import ComRealizada from "../pages/ComRealizada";
+import Empleado from "../pages/Empleado";
 
 
 
@@ -25,6 +26,7 @@ class Main extends Component {
             <Routes>
                 <Route path="/home" element={<Home />} />
                 <Route path="/" element={<Home />} />
+                <Route path="/empleado" element={<Empleado />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/registro" element={<Registro />} />
                 <Route path="/pruebas" element={<Pruebas />} />
