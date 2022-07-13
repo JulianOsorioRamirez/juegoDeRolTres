@@ -112,13 +112,18 @@ const updateUserEvento = async (req, res) => {
     if (!eventoFind) {
       res.status(404).json({ error: 'Evento no encontrado' });
     }
-      const newEvento = { $set: {
-        participantes: [emailUser]}
+      const newEvento = { $push: {
+        participantes: emailUser}
       };
-      console.log(newEvento);
-    const eventoUpdate = await Evento.updateOne(eventoFind, newEvento, {
+      const eventoUpdate = await Evento.findByIdAndUpdate(evento, newEvento, {
+        new: true,
+      });
+      console.log(eventoUpdate);
+ 
+      
+    // const eventoUpdate = await Evento.updateOne(eventoFind, newEvento, {
 
-    });
+    // });
 
 
     res.json(eventoUpdate);
