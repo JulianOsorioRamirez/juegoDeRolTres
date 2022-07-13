@@ -25,7 +25,7 @@ function SelectBasicExample() {
       }
       );
   }, []);
-console.log(cards)
+  console.log(cards)
   return (
 
     <div className="targetas">
@@ -36,7 +36,7 @@ console.log(cards)
             <Card.Body>
               <Card.Title>{tarjeta.nombre}</Card.Title>
               <Card.Text>{tarjeta.fecha}</Card.Text>
-              <Card.Text>{tarjeta.provincia}---{ tarjeta.precio}</Card.Text>
+              <Card.Text>{tarjeta.provincia}---{tarjeta.precio}</Card.Text>
               <Card.Text>
 
                 Nº de participantes: {(tarjeta.participantes).length}
@@ -44,13 +44,13 @@ console.log(cards)
               <Tarjeta />
             </Card.Body>
           </Card>
-         
+
         )
-      }): <div>...Cargando</div>}
-        
+      }) : <div>...Cargando</div>}
+
     </div>
   )
-   
+
 
 }
 
