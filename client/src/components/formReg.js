@@ -43,7 +43,7 @@ function FormExample() {
                             role: "Usuario"})
     };
 
-    fetch("register", requestOptions)
+    fetch("users", requestOptions)
       .then((response) => response.json())
       .then((res) =>{
         console.log(res)
