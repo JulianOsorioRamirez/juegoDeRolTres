@@ -58,3 +58,31 @@
   margin-top: 100px;
 
 }
+.credit-card-div  span { padding-top:10px; }
+.credit-card-div img { padding-top:30px; }
+.credit-card-div .small-font { font-size:9px; }
+.credit-card-div .pad-adjust { padding-top:10px; }
+.img-rounded { width:42px; }
+
+.btnSelect{
+ 
+  width: 150px; 
+  height: 40px;
+  font-size: 1.5rem;
+  border-radius: 35px;
+  color: white;
+  background-color: #61dafb;
+  border: none;
+
+}
+
+.btnDorsal{
+  margin-left: 50px;
+  width: 150px; 
+  height: 40px;
+  font-size: 1.3rem;
+  border-radius: 35px;
+  color: white;
+  background-color: #ff00ae;
+  border: none;
+}

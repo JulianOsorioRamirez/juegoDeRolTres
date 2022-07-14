@@ -1,19 +1,24 @@
 const { httpError } = require('../helpers/handleError');
 const mongoose = require('mongoose');
 
+
 const Evento = require('../models/Evento');
+const User = require('../models/User');
+const Inscripcion = require('../models/Inscripcion');
 
 const getEventos = async (req, res) => {
   try {
     console.log(req.body);
 
+
+
     const eventos = await Evento.find({});
-    // console.log(eventos);
 
     res.json({
       message: true,
       eventos
     });
+
   } catch (err) {
     console.log(err);
     httpError(res, err);
@@ -21,7 +26,8 @@ const getEventos = async (req, res) => {
 };
 const getEventosAndalucia = async (req, res) => {
   try {
-    const eventos = await Evento.find({ provincia: 'Andalucia' });
+    const provinciaEvento = req.body.provincia;
+    const eventos = await Evento.find({ provincia: provinciaEvento });
     // console.log(eventos);
 
     res.json({
@@ -52,6 +58,7 @@ const getComprar = async (req, res) => {
       console.log("no se puede comprar");
       res.json({
         message: false,
+        eventos
 
       });
     }
@@ -98,7 +105,38 @@ const createEvento = async (req, res) => {
     httpError(res, err);
   }
 };
+const updateUserEvento = async (req, res) => {
+  try {
+    const evento = req.body.prueba;
+    const emailUser = req.body.emailUser;
 
+    console.log(emailUser);
+    const eventoFind = await Evento.findOne({ _id: evento });
+    // console.log(eventoFind.participantes);
+    if (!eventoFind) {
+      res.status(404).json({ error: 'Evento no encontrado' });
+    }
+    const newEvento = {
+      $push: {
+        participantes: emailUser
+      }
+    };
+    const eventoUpdate = await Evento.findByIdAndUpdate(evento, newEvento, {
+      new: true,
+    });
+    console.log(eventoUpdate);
+
+
+
+
+    res.json(eventoUpdate);
+
+  } catch (err) {
+    httpError(res, err);
+
+  }
+
+}
 const updateEvento = async (req, res) => {
   try {
     const eventoId = req.params.id;
@@ -136,6 +174,87 @@ const deleteEvento = async (req, res) => {
     httpError(res, err);
   }
 };
+const AplicarDorsal = async (req, res) => {
+
+  try {
+    const eventoId = req.body.idPrueba;
+
+    function getRandomArbitrary(min, max) {
+      return (Math.random() * (max - min) + min).toFixed(0);
+    }
+
+
+    const evento = await Inscripcion.find({ idPrueba: eventoId });
+    const dorsalesBus= [];
+    // console.log("Esto es el evento "+evento);
+    for (let i = 0; i < evento.length; i++) {
+      // console.log(" Esta mierda "+evento[i]);
+      // console.log("Esto es 192 "+evento[i]._id)
+      const dorsal = String(getRandomArbitrary(1, 100));
+      dorsalesBus.push(dorsal)
+    }
+
+    dorsalesBus.map(async (dorsal,i) => {
+      console.log(dorsal);
+      console.log(evento[i]._id);
+      await Inscripcion.findOneAndUpdate({_id: evento[i]._id}, { dorsal: "eeeee" }, { new: true });
+    })
+      // const newDorsal = {
+      //   $push: {
+      //     dorsal: dorsal
+      //   }
+      // };
+      // console.log("Esto es el newDorsal "+newDorsal);
+      // const eventoUpdate = await Inscripcion.findOneAndUpdate({evento: "62cc56799bb59b25101c977e" }, {dorsal: "aaaaa"}, {
+      //   new: true,
+      // });
+      // console.log(eventoUpdate);
+    
+    
+     
+
+
+      
+        // const inscripcionUpdate = await Inscripcion.findOneAndUpdate({evento:"62cc56799bb59b25101c977e" },{dorsal:"mierda"},{new:true});
+         
+        // console.log("hola "+inscripcionUpdate);
+      // }
+  
+      
+    
+
+
+    
+
+
+    
+
+
+
+
+
+    // const usuarios = await User.findOne({ email: evento.participantes[i] });
+
+    // const insertarDorsal = { $set: { inscrpcion: [dorsal] } };
+
+    // const eventoUpdate = await User.findByIdAndUpdate(usuarios._id, insertarDorsal);
+
+
+    // console.log(eventoUpdate);
+    // console.log(usuarios.inscripcion);
+    // }
+
+
+
+
+
+
+  } catch (err) {
+    httpError(res, err);
+  }
+}
+
+
 
 module.exports = {
   getEventos,
@@ -144,5 +263,7 @@ module.exports = {
   updateEvento,
   deleteEvento,
   getEventosAndalucia,
-  getComprar
+  getComprar,
+  updateUserEvento,
+  AplicarDorsal,
 };

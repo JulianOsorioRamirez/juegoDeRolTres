@@ -5,8 +5,11 @@ import Card from 'react-bootstrap/Card';
 function BasicExample() {
 
     const [cards, setCards] = useState([]);
+    const [Recoger, setRecoger] = useState("");
 
-    
+    localStorage.setItem('prueba', JSON.stringify({
+        prueba: Recoger
+    }));
 
     useEffect(() => {
 
@@ -14,7 +17,7 @@ function BasicExample() {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                provincia: 'Andalucia'
+                provincia: 'Bilbao'
             }),
         };
 
@@ -49,7 +52,12 @@ console.log(cards)
                             <Card.Text>
                                 Nº de participantes: {(tarjeta.participantes).length}
                             </Card.Text>
-                            <Button variant="primary">Inscribirte</Button>
+                            {(tarjeta.participantes).length < 10 ?
+                            <Button variant="primary" href={`/compra `} onClick={()=>setRecoger(tarjeta._id)}>Inscribirte</Button>
+                                :  <Card.Text>
+                                    <h1 style={{color:"red",border:"1px solid red"}}> No quedan Plazas disponibles </h1>
+                                </Card.Text>
+                            }
                         </Card.Body>
                     </Card>
                 )

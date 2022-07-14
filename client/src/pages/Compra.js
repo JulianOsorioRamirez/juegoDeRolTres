@@ -2,15 +2,18 @@ import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
+import Tarjeta from '../components/tarjeta'
 
 function SelectBasicExample() {
+
   const [cards, setCards] = useState([]);
+
   useEffect(() => {
     const reaquestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        idPrueba: JSON.parse(localStorage.getItem('user')).user
+        idPrueba: JSON.parse(localStorage.getItem('prueba')).prueba
       })
     };
     fetch('eventoCompra', reaquestOptions)
@@ -22,7 +25,7 @@ function SelectBasicExample() {
       }
       );
   }, []);
-console.log(cards)
+  console.log(cards)
   return (
 
     <div className="targetas">
@@ -33,26 +36,21 @@ console.log(cards)
             <Card.Body>
               <Card.Title>{tarjeta.nombre}</Card.Title>
               <Card.Text>{tarjeta.fecha}</Card.Text>
-              <Card.Text>{tarjeta.provincia}---{ tarjeta.precio}</Card.Text>
+              <Card.Text>{tarjeta.provincia}---{tarjeta.precio}</Card.Text>
               <Card.Text>
 
                 Nº de participantes: {(tarjeta.participantes).length}
               </Card.Text>
-              
+              <Tarjeta />
             </Card.Body>
           </Card>
-         
+
         )
-      }): <div>Cargando...</div>}
-        <Form.Select aria-label="Default select example">
-           <option>Open this select menu</option>
-           <option value="1">One</option>
-           <option value="2">Two</option>
-           <option value="3">Three</option>
-         </Form.Select>
+      }) : <div>...Cargando</div>}
+
     </div>
   )
-   
+
 
 }
 
