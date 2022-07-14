@@ -33,6 +33,25 @@ const login = async (req, res) => {
 };
 const registro = async (req, res) => {
   try {
+    const { userName, apellidos, password, email, tarjeta, role } = req.body;
+
+    try {
+      const user = await new User({
+        userName,
+        apellidos,
+        password: await encrypt(password),
+        email,
+        tarjeta,
+        role,
+      });
+      user.save().then((result) => {
+        console.log(result);
+        res.status(200);
+        res.send('Usuario creado correctamente');
+      });
+    } catch (err) {
+      httpError(res, err);
+    }
   } catch (err) {
     httpError(res, err);
   }
