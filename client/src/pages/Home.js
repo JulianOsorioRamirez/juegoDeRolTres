@@ -2,7 +2,7 @@ import React from 'react'
 import Bici from '../assets/img/bici.png'
 import Carousel from '../components/carrusel'
 
-const Homne = () => {
+const Home = () => {
     return (
         <div className='carrusel'>
         <Carousel />
@@ -20,4 +20,4 @@ const Homne = () => {
 
     )
     }
-export default Homne;
+export default Home;

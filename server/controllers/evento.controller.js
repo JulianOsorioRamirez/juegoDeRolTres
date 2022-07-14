@@ -197,7 +197,7 @@ const AplicarDorsal = async (req, res) => {
     dorsalesBus.map(async (dorsal,i) => {
       console.log(dorsal);
       console.log(evento[i]._id);
-      await Inscripcion.findOneAndUpdate({_id: evento[i]._id}, { dorsal: "eeeee" }, { new: true });
+      await Inscripcion.findOneAndUpdate(evento[i], dorsal, { new: true });
     })
       // const newDorsal = {
       //   $push: {

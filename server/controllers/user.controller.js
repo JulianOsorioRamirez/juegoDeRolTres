@@ -40,6 +40,7 @@ const createUser = async (req, res) => {
       email,
       tarjeta,
       role,
+      inscripcion: false,
     });
     user.save().then((result) => {
       console.log(result);
@@ -55,12 +56,13 @@ const getTarjetaUser = async (req, res) => {
   try {
     const userMail = req.body.emailUser;
     const nTarjeta = req.body.nTarjeta;
-    console.log(nTarjeta);
+    console.log("Mola "+nTarjeta);
     const user = await User.findOne({ email: userMail });
+    console.log("Esto es el usuario "+user);
     if (!user) {
       res.status(404).json({ error: 'Usuario no encontrado' });
     }
-   const newTarjeta = { $set:{
+   const newTarjeta = { $push:{
     tarjeta : nTarjeta}
    }
     const userUpdate = await User.findOneAndReplace(user, newTarjeta, {
