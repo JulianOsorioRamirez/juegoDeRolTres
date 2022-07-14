@@ -37,6 +37,7 @@ function BasicExample() {
         }
       }, 1000);
       
+      console.log(sendRole)
     
     setTimeout(() => {if (sendEmailLog) {
       navigate("/home")

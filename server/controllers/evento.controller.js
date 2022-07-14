@@ -1,6 +1,6 @@
 const { httpError } = require('../helpers/handleError');
 const mongoose = require('mongoose');
-const uuid = require('uuid');
+
 
 const Evento = require('../models/Evento');
 const User = require('../models/User');
@@ -185,38 +185,49 @@ const AplicarDorsal = async (req, res) => {
 
 
     const evento = await Inscripcion.find({ idPrueba: eventoId });
+    const dorsalesBus= [];
     // console.log("Esto es el evento "+evento);
     for (let i = 0; i < evento.length; i++) {
-      console.log(evento[i]);
-
-      const dorsal = getRandomArbitrary(1, 100);
-
-      console.log("Esto es el dorsal " + dorsal);
-
-      const newInscripcion = {
-        $push: {
-          dorsal: dorsal
-        }
-      };
-      console.log(newInscripcion);
-      const inscripcionUpdate = await Inscripcion.updateMany(evento[i]._id, newInscripcion, {
-        new: true,
-      });
-     
-      console.log(inscripcionUpdate);
+      // console.log(" Esta mierda "+evento[i]);
+      // console.log("Esto es 192 "+evento[i]._id)
+      const dorsal = String(getRandomArbitrary(1, 100));
+      dorsalesBus.push(dorsal)
     }
 
+    dorsalesBus.map(async (dorsal,i) => {
+      console.log(dorsal);
+      console.log(evento[i]._id);
+      await Inscripcion.findOneAndUpdate({_id: evento[i]._id}, { dorsal: "eeeee" }, { new: true });
+    })
+      // const newDorsal = {
+      //   $push: {
+      //     dorsal: dorsal
+      //   }
+      // };
+      // console.log("Esto es el newDorsal "+newDorsal);
+      // const eventoUpdate = await Inscripcion.findOneAndUpdate({evento: "62cc56799bb59b25101c977e" }, {dorsal: "aaaaa"}, {
+      //   new: true,
+      // });
+      // console.log(eventoUpdate);
+    
+    
+     
 
-    console.log(evento);
+
+      
+        // const inscripcionUpdate = await Inscripcion.findOneAndUpdate({evento:"62cc56799bb59b25101c977e" },{dorsal:"mierda"},{new:true});
+         
+        // console.log("hola "+inscripcionUpdate);
+      // }
+  
+      
+    
 
 
-    // for (let i = 0; i < evento.participantes.length; i++) {
-    //   const dorsal = getRandomArbitrary(1, 100);
+    
 
-    //   const insertarDorsal = { $push: { inscrpcion: dorsal } };
-    //   const eventoUpdate = await User.findOneAndUpdate({ email: evento.participantes[i] }, insertarDorsal, {
-    //     new: true,
-    //   });
+
+    
 
 
 

@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function CollapsibleExample() {
   function LogOut () {
-    localStorage.removeItem('user');
+    localStorage.clear();
 
     window.location.reload()
   }
